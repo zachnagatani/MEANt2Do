@@ -1,1 +1,26 @@
-{{vm.state}}
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">
+					Sign Up!
+				</div>
+
+				<div class="panel-body">
+					<form action="POST" method="/api/users/signup" name="signupForm" id="signupForm">
+						<div class="form-group">
+							<label for="username">Enter Your Username</label>
+							<input type="text" name="username" id="username" class="form-control" required>
+						</div>
+
+						<div class="form-group">
+							<label for="password">Enter Your Password</label>
+							<input type="password" name="password" id="password" class="form-control" required>
+						</div>
+						<input type="submit" value="Sign Up" class="btn btn-default pull-right">
+					</form>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
