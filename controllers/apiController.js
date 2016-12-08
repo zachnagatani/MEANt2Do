@@ -93,7 +93,7 @@ module.exports = function(app) {
         }, function(err, user) {
         	// If so, return and send username error
         	// TODO: Better handling for username error (remove res.send)
-            if (user) return res.send('Username already exists');
+            if (user) return res.status(409).send('Username already exists');
 
             // Create new instance of a user
             var newUser = User({

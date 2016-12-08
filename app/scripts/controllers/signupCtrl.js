@@ -11,10 +11,14 @@
 			self.signup = function(username, password, event) {
 				event.preventDefault();
 				apiPOST.post(URL, { 'username': username, 'password': password })
-					.then(function(response) {
+					.then(function success(response) {
+						console.log(response);
 						if (response.status === 200) {
 							$state.go('dashboard');
 						}
+					}, function error(response) {
+						// Todo: prettier error handling
+						if (response.data === 'Username already exists') alert('Username already exists');
 					});
 			};
 		}]);
