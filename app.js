@@ -8,6 +8,7 @@ var express = require('express');
     port = process.env.PORT || 3000;
 
 app.use('/assets', express.static(__dirname + '/app'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 mongoose.connect(config.getDbConnectionString());
 

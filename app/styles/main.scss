@@ -3,3 +3,9 @@ $icon-font-path: '../fonts/';
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
+
+body, html, main {
+  width: 100%;
+  height: 100%;
+  color: black;
+}
