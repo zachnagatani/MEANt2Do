@@ -18,7 +18,7 @@
 						}
 					}, function error(response) {
 						// Todo: prettier error handling
-						if (response.data === 'Username already exists') alert('Username already exists');
+						self.usernameConflict = true;
 					});
 			};
 		}]);

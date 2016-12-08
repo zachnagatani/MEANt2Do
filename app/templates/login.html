@@ -23,7 +23,10 @@
 						    	<div ng-message="required" class="text-danger">You must enter a password.</div>
 						    </div>
 						</div>
-						<input type="submit" value="Login" class="btn btn-default pull-right">
+							<div ng-show="vm.formInvalid">
+						    	<div class="text-danger">Username or password is invalid.</div>
+						    </div>
+						<input type="submit" value="Login" class="btn btn-default pull-right" ng-click="vm.login(username, password, $event)">
 					</form>	
 				</div>
 			</div>

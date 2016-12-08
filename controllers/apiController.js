@@ -105,7 +105,7 @@ module.exports = function(app) {
             newUser.save(function(error) {
                 if (error) return res.status(400).end();
 
-                return res.status(200).end();
+                return res.sendStatus(200);
                 // set the session to that user
                 // req.session.user = newUser;
                 // res.send('User saved!');
@@ -131,13 +131,16 @@ module.exports = function(app) {
                         req.session.user = user;
                         // Hide the users password
                         req.session.user.password = null;
-                        res.redirect('/dashboard');
+                        // res.redirect('/dashboard');
+                        res.sendStatus(200);
                     } else {
+                        res.sendStatus(400);
                     	// TODO: Better error handling
                         // res.send('Invalid username or password');
                     }
                 });
             } else {
+                res.sendStatus(400);
                 // res.redirect('/signup');
             }
         });

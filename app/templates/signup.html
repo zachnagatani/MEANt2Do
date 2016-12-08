@@ -14,6 +14,9 @@
 							<div ng-messages="signupForm.username.$touched && signupForm.username.$error">
 						    	<div ng-message="required" class="text-danger">You must enter a username.</div>
 						    </div>
+						    <div ng-show="vm.usernameConflict">
+						    	<div class="text-danger">That username already exists; please choose a new one.</div>
+						    </div>
 						</div>
 
 						<div class="form-group">
