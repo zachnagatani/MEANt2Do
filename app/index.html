@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="">
+<html lang="en" ng-app="meantodo" ng-cloak>
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -15,15 +15,14 @@
     <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/assets/styles/main.css">
     <!-- endbuild -->
     
   </head>
-  <body>
+  <body ng-controller="indexCtrl as vm">
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -84,6 +83,11 @@
     
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
+    <script src="scripts/services/services.js"></script>
+    <script src="scripts/controllers/indexCtrl.js"></script>
+    <script src="scripts/controllers/signupCtrl.js"></script>
+    <script src="scripts/controllers/loginCtrl.js"></script>
+    <script src="scripts/controllers/dashboardCtrl.js"></script>
     <!-- endbuild -->
   </body>
 </html>
