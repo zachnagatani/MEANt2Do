@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('meantodo', ['ui.router']);
+	angular.module('meantodo', ['ui.router', 'ngMessages']);
 
 	angular.module('meantodo')
 		.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
