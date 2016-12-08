@@ -4,6 +4,7 @@ var express = require('express');
     session = require('client-sessions');
     randomstring = require('randomstring');
     config = require('./config');
+    apiController = require('./controllers/apiController');
     SECRET = randomstring.generate();
     port = process.env.PORT || 3000;
 
@@ -11,11 +12,6 @@ app.use('/assets', express.static(__dirname + '/app'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 mongoose.connect(config.getDbConnectionString());
-
-app.get('/', function(req, res) {
-	res.sendFile('index.html', {
-		root: __dirname + '/app'
-	});
-});
+apiController(app);
 
 app.listen(port);

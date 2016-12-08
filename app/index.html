@@ -15,7 +15,7 @@
     <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="/assets/styles/main.css">
+    <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     
   </head>
@@ -37,13 +37,17 @@
 
         <div class="collapse navbar-collapse" id="nav-main">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Sign Up</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/#/login">Login</a></li>
+            <li><a href="/#/signup">Sign Up</a></li>
+            <li><a href="/#/logout">Logout</a></li>
           </ul>
         </div>
       </div>
     </nav>
+
+    <main>
+      <ui-view></ui-view>
+    </main>
     
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -82,12 +86,12 @@
     <!-- endbuild -->
     
     <!-- build:js scripts/main.js -->
-    <script src="/assets/scripts/main.js"></script>
-    <script src="/assets/scripts/services/services.js"></script>
-    <script src="/assets/scripts/controllers/indexCtrl.js"></script>
-    <script src="/assets/scripts/controllers/signupCtrl.js"></script>
-    <script src="/assets/scripts/controllers/loginCtrl.js"></script>
-    <script src="/assets/scripts/controllers/dashboardCtrl.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/services/services.js"></script>
+    <script src="scripts/controllers/indexCtrl.js"></script>
+    <script src="scripts/controllers/signupCtrl.js"></script>
+    <script src="scripts/controllers/loginCtrl.js"></script>
+    <script src="scripts/controllers/dashboardCtrl.js"></script>
     <!-- endbuild -->
   </body>
 </html>
