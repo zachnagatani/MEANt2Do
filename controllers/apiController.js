@@ -7,7 +7,7 @@ var Todos = require('../models/todoModel');
 
 function requireLogin (req, res, next) {
     if (!req.session.user) {
-        res.redirect('/login');
+        // res.redirect('/login');
     } else {
         next();
     }
@@ -58,7 +58,7 @@ module.exports = function(app) {
 
         newTodo.save(function(err) {
             if (err) throw err;
-            res.redirect('/dashboard');
+            // res.redirect('/dashboard');
         });
     });
 
@@ -103,11 +103,14 @@ module.exports = function(app) {
 
             // Save the user to the db
             newUser.save(function(error) {
-                if (error) throw error;
+                if (error) return res.status(400).end();
+
+                return res.status(200).end();
                 // set the session to that user
-                req.session.user = newUser;
+                // req.session.user = newUser;
+                // res.send('User saved!');
                 // redirect to the dashboard
-                res.redirect('/dashboard');
+                // res.redirect('/dashboard');
             });
         });
     });
@@ -131,11 +134,11 @@ module.exports = function(app) {
                         res.redirect('/dashboard');
                     } else {
                     	// TODO: Better error handling
-                        res.send('Invalid username or password');
+                        // res.send('Invalid username or password');
                     }
                 });
             } else {
-                res.redirect('/signup');
+                // res.redirect('/signup');
             }
         });
     });

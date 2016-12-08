@@ -7,7 +7,7 @@
 				</div>
 
 				<div class="panel-body">
-					<form action="POST" method="/api/users/signup" name="signupForm" id="signupForm">
+					<form action="" method="POST" name="signupForm" id="signupForm">
 						<div class="form-group">
 							<label for="username">Enter Your Username</label>
 							<input type="text" name="username" id="username" class="form-control" ng-model="username" required>
@@ -23,7 +23,7 @@
 						    	<div ng-message="required" class="text-danger">You must enter a password.</div>
 						    </div>
 						</div>
-						<input type="submit" value="Sign Up" class="btn btn-default pull-right">
+						<input type="submit" value="Sign Up" class="btn btn-default pull-right" ng-click="vm.signup(username, password, $event)">
 					</form>	
 				</div>
 			</div>
