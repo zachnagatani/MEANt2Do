@@ -103,9 +103,16 @@ module.exports = function(app) {
 
             // Save the user to the db
             newUser.save(function(error) {
-                if (error) return res.status(400).end();
+                var token;
+                token = user.generateJwt();
+                res.status(200);
+                res.json({
+                    'token': token
+                });
 
-                return res.sendStatus(200);
+                // if (error) return res.status(400).end();
+
+                // return res.sendStatus(200);
                 // set the session to that user
                 // req.session.user = newUser;
                 // res.send('User saved!');
@@ -118,32 +125,52 @@ module.exports = function(app) {
     // Logs the user in
     app.post('/api/users/login', function(req, res) {
         // Grab the user from the username provided
-        User.findOne({
-            username: req.body.username
-        }, function(err, user) {
-            // Compare the entered pw to the pw in the db
-            if (user) { 
-                user.comparePassword(req.body.password, function(err, isMatch) {
-                    if (err) throw err;
-                    // If it matches,
-                    if (isMatch) {
-                        // Set the user property on our session to the user
-                        req.session.user = user;
-                        // Hide the users password
-                        req.session.user.password = null;
-                        // res.redirect('/dashboard');
-                        res.sendStatus(200);
-                    } else {
-                        res.sendStatus(400);
-                    	// TODO: Better error handling
-                        // res.send('Invalid username or password');
-                    }
+        // User.findOne({
+        //     username: req.body.username
+        // }, function(err, user) {
+        //     // Compare the entered pw to the pw in the db
+        //     if (user) { 
+        //         user.comparePassword(req.body.password, function(err, isMatch) {
+        //             if (err) throw err;
+        //             // If it matches,
+        //             if (isMatch) {
+        //                 // Set the user property on our session to the user
+        //                 // req.session.user = user;
+        //                 // Hide the users password
+        //                 // req.session.user.password = null;
+        //                 // res.redirect('/dashboard');
+        //                 res.sendStatus(200);
+        //             } else {
+        //                 res.sendStatus(400);
+        //             	// TODO: Better error handling
+        //                 // res.send('Invalid username or password');
+        //             }
+        //         });
+        //     } else {
+        //         res.sendStatus(400);
+        //         // res.redirect('/signup');
+        //     }
+        // });
+
+        passport.authenticate('local', function(err, user, info) {
+            var token;
+
+            // If Passport throws/catches an error
+            if (err) {
+              res.status(404).json(err);
+              return;
+            }
+
+            if(user) {
+                token = user.generateJwt();
+                res.status(200);
+                res.json({
+                    'token': token
                 });
             } else {
-                res.sendStatus(400);
-                // res.redirect('/signup');
+                res.status(401).json(info);
             }
-        });
+        })(req, res);
     });
 
     // Handles deleting a user

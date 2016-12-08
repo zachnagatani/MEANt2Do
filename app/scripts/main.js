@@ -20,6 +20,8 @@
 					url: '/dashboard',
 					templateUrl: 'templates/dashboard.html',
 					controller: 'dashboardCtrl as vm'
-				})
+				});
+				
+			$urlRouterProvider.otherwise('/login');
 		}]);
 }());
