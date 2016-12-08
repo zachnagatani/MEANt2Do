@@ -5,7 +5,7 @@ var passport = require('passport');
 
 passport.use(new LocalStrategy(function(username, password, done) {
     User.findOne({
-        username: req.body.username
+        username: username
     }, function(err, user) {
     	if (err) return done(err);
 
@@ -14,7 +14,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
     			message: 'User not found'
     		});
     	} else {
-            user.comparePassword(req.body.password, function(err, isMatch) {
+            user.comparePassword(password, function(err, isMatch) {
                 if (err) throw err;
                 // If it matches,
                 if (isMatch) {
