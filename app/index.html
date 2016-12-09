@@ -37,9 +37,9 @@
 
         <div class="collapse navbar-collapse" id="nav-main">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/#/login">Login</a></li>
-            <li><a href="/#/signup">Sign Up</a></li>
-            <li><a href="/#/logout">Logout</a></li>
+            <li ng-show="!vm.isLoggedIn"><a href="/#/login">Login</a></li>
+            <li ng-show="!vm.isLoggedIn"><a href="/#/signup">Sign Up</a></li>
+            <li ng-show="vm.isLoggedIn"><a href="/#/logout">Logout</a></li>
           </ul>
         </div>
       </div>

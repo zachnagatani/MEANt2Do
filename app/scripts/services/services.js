@@ -28,7 +28,7 @@
 			};
 
 			self.getToken = function() {
-				return $window.localStorage['mean-token'] = token;
+				return $window.localStorage['mean-token'];
 			};
 
 			self.logout = function() {
@@ -36,14 +36,13 @@
 			};
 
 			self.isLoggedIn = function() {
-				var token = self.getToken;
+				var token = self.getToken();
 				var payload;
 
 				if(token) {
 					payload = token.split('.')[1];
 					payload = $window.atob(payload);
 					payload = JSON.parse(payload);
-
 					return payload.exp > Date.now() / 1000;
 				} else {
 					return false;
@@ -51,7 +50,8 @@
 			};
 
 			self.currentUser = function() {
-				if(isLoggedIn()) {
+				if(self.isLoggedIn()) {
+					var token = self.getToken();
 					var payload = token.split('.')[1];
 					payload = $window.atob(payload);
 					payload = JSON.parse(payload);

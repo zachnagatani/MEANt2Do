@@ -2,9 +2,9 @@
 	'use strict';
 
 	angular.module('meantodo')
-		.controller('dashboardCtrl', ['$scope', function($scope) {
+		.controller('dashboardCtrl', ['$scope', '$state', 'authentication', function($scope, $state, authentication) {
 			var self = this;
 
-			self.state = 'Dashboard';
+			if (!authentication.isLoggedIn()) $state.go('login');
 		}]);
 }());

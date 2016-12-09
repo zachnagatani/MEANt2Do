@@ -2,9 +2,14 @@
 	'use strict';
 
 	angular.module('meantodo')
-		.controller('indexCtrl', ['$scope', function($scope) {
+		.controller('indexCtrl', ['$scope', 'authentication', function($scope, authentication) {
 			var self = this;
-
-			self.name = 'Zach';
+			console.log(authentication.isLoggedIn());
+			self.isLoggedIn = authentication.isLoggedIn();
+			self.currentUser = authentication.currentUser();
+			$scope.$on('loggedIn', function(event, loggedIn) {
+				console.log(loggedIn);
+				self.isLoggedIn = loggedIn;
+			});
 		}]);
 }());

@@ -17,6 +17,7 @@
 							authentication.saveToken(response.data.token);
 							console.log(response.data.token);
 							$state.go('dashboard');
+							$scope.$emit('loggedIn', authentication.isLoggedIn());
 						}
 					}, function error(response) {
 						self.formInvalid = true;

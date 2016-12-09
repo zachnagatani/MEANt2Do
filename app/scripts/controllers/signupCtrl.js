@@ -16,6 +16,7 @@
 						if (response.status === 200) {
 							console.log(response.data.token);
 							authentication.saveToken(response.data.token);
+							$scope.$emit('loggedIn', authentication.isLoggedIn());
 							$state.go('dashboard');
 						}
 					}, function error(response) {

@@ -22,6 +22,6 @@
 					controller: 'dashboardCtrl as vm'
 				});
 				
-			$urlRouterProvider.otherwise('/login');
+			// $urlRouterProvider.otherwise('/login');
 		}]);
 }());
