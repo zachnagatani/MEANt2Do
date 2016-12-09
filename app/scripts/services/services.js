@@ -5,8 +5,8 @@
 		.service('apiGET', ['$http', function($http) {
 		var self = this;
 
-		self.get = function(url) {
-			return $http.get(url);
+		self.get = function(url, options) {
+			return $http.get(url, options);
 		};
 	}]);
 

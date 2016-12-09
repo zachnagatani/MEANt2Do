@@ -30,16 +30,27 @@ module.exports = function(app) {
     }));
 
     // Get all the todos that belong to a specific user
-    app.get('/api/todos/:username', function(req, res) {
+    app.get('/api/todos', auth, function(req, res) {
         // Grab all of the Todos instances
-        Todos.find({
-            // that belong to the username passed into the URL
-            username: req.params.username
-        }, function(err, todos) {
-            if (err) throw err;
-            // Send the todos grabbed from Mongo as the HTTP response
-            res.send(todos);
-        });
+        // Todos.find({
+        //     // that belong to the username passed into the URL
+        //     username: req.params.username
+        // }, function(err, todos) {
+        //     if (err) throw err;
+        //     // Send the todos grabbed from Mongo as the HTTP response
+        //     res.send(todos);
+        // });
+
+        if (!req.payload._id) {
+            res.status(401).json({
+                'message': 'Unauthorized error: private dashboard'
+            });
+        } else {
+            Todos.find({ username: req.payload.username })
+                .exec(function(err, todos) {
+                    res.status(200).json(todos);
+                });
+        }
     });
 
     app.get('/api/todo/:id', function(req, res) {
@@ -55,15 +66,16 @@ module.exports = function(app) {
 
     // TODO: authenticate user before adding todo
     app.post('/api/todo/new', function(req, res) {
+        console.log('adding...');
         var newTodo = Todos({
-            username: req.session.user.username,
+            username: req.body.username,
             todo: req.body.todo,
             isDone: false
         });
 
         newTodo.save(function(err) {
             if (err) throw err;
-            // res.redirect('/dashboard');
+            res.sendStatus(200);
         });
     });
 
@@ -87,7 +99,7 @@ module.exports = function(app) {
                 'message': 'Unauthorized error: private dashboard'
             });
         } else {
-            User.findById(req.payload.id)
+            User.findById(req.payload._id)
                 .exec(function(err, user) {
                     res.status(200).json(user);
                 });
