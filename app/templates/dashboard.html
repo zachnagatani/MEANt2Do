@@ -3,7 +3,8 @@
 		<div class="col-md-4 col-md-offset-4">
 			<form action="POST" name="addTodoForm">
 				<div class="form-group">
-					<label for="todo">What do you need to do?</label>
+					<label for="todo" ng-hide="vm.editing">What do you need to do?</label>
+					<label for="todo" ng-show="vm.editing">Editing: "{{ vm.currentTodo.todo }}"</label>
 					<input type="text" name="todo" id="todo" class="form-control" ng-model="todo">
 				</div>
 				<input ng-hide="vm.editing" type="submit" value="Add" class="btn btn-default pull-right" ng-click="vm.addTodo(todo, $event)">
@@ -15,21 +16,21 @@
 	<br>
 
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-12">
 			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="todo in vm.todos">
+				<li class="list-group-item clearfix" ng-repeat="todo in vm.todos">
 <!-- 					<form action="POST">
 						<div class="form-group">
 							<label for="updateTodo"></label>
 							<input type="text" name="updateTodo" id="updateTodo" ng-model="updateTodo" class="form-control" placeholder="{{ todo.todo }}">
 						</div>
 					</form> -->
-					<span>{{ todo.todo }}</span>
-					<button class="btn btn-default pull-right">Delete</button>
-					<button class="btn btn-default pull-right" ng-click="vm.enterEditing(todo)">Edit</button>
-					<button class="btn btn-default pull-right">Done</button>
+					<span ng-if="todo.isDone">&#10004; </span><span>{{ todo.todo }}</span>
+					<button class="btn btn-default btn-block pull-right">Delete</button>
+					<button class="btn btn-default btn-block pull-right" ng-click="vm.enterEditing(todo)">Edit</button>
+					<button class="btn btn-default btn-block pull-right" ng-click="vm.checkTodo(todo)">Toggle Finished</button>
 				</li>
-			</ul>	
+			</ul>
 		</div>
 	</div>
 </div>

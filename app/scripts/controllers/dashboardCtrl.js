@@ -18,6 +18,7 @@
 				})
 					.then(function(response) {
 						self.todos = response.data;
+						console.log(self.todos);
 					});
 			};
 			self.getTodos();
@@ -43,10 +44,9 @@
 			};
 
 			self.updateTodo = function(currentTodo, todo, event) {
-				event.preventDefault();
+				if (event) event.preventDefault();
 				// console.log(currentTodo, todo);
-				console.log(currentTodo._id);
-				apiPOST.post(UPDATETODOURL, { 'id': currentTodo._id, 'todo': todo }, {
+				apiPOST.post(UPDATETODOURL, { 'id': currentTodo._id, 'todo': todo, 'isDone': currentTodo.isDone }, {
 					headers: {
 						Authorization: 'Bearer ' + token
 					}
@@ -56,6 +56,13 @@
 					}, function(response) {
 						console.log(response);
 					});
+			};
+
+			self.checkTodo = function(todo) {
+				self.currentTodo = todo;
+				self.currentTodo.isDone === false ? self.currentTodo.isDone = true : self.currentTodo.isDone = false;
+
+				self.updateTodo(self.currentTodo, self.currentTodo.todo);
 			};
 		}]);
 }());
