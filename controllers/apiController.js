@@ -10,14 +10,6 @@ var Todos = require('../models/todoModel');
         userProperty: 'payload'
     });
 
-function requireLogin (req, res, next) {
-    if (!req.session.user) {
-        // res.redirect('/login');
-    } else {
-        next();
-    }
-}
-
 module.exports = function(app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -65,10 +57,9 @@ module.exports = function(app) {
     });
 
     // TODO: authenticate user before adding todo
-    app.post('/api/todo/new', function(req, res) {
-        console.log('adding...');
+    app.post('/api/todos/new', auth, function(req, res) {
         var newTodo = Todos({
-            username: req.body.username,
+            username: req.payload.username,
             todo: req.body.todo,
             isDone: false
         });
@@ -79,12 +70,12 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/api/todo/update', function(req, res) {
+    app.post('/api/todos/update', function(req, res) {
     	// TODO: Add method for updating todos
     });
 
     // Handles deleting todos
-    app.delete('/api/todo/delete', function(req, res) {
+    app.delete('/api/todos/delete', function(req, res) {
         // Find it by id and remove it!
         Todos.findByIdAndRemove(req.body.id, function(err) {
             if (err) throw err;
@@ -194,7 +185,7 @@ module.exports = function(app) {
     });
 
     // Handles deleting a user
-    app.delete('/api/users/:username', requireLogin, function(req, res) {
+    app.delete('/api/users/:username',  function(req, res) {
         User.findByIdAndRemove(req.body.id, function(err) {
             if (err) throw err;
             res.send('User deleted!');

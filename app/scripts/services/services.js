@@ -5,8 +5,8 @@
 		.service('apiGET', ['$http', function($http) {
 		var self = this;
 
-		self.get = function(url, options) {
-			return $http.get(url, options);
+		self.get = function(url, config) {
+			return $http.get(url, config);
 		};
 	}]);
 
@@ -14,8 +14,8 @@
 		.service('apiPOST', ['$http', function($http) {
 			var self = this;
 
-			self.post = function(url, data) {
-				return $http.post(url, data);
+			self.post = function(url, data, config) {
+				return $http.post(url, data, config);
 			};
 		}]);
 
