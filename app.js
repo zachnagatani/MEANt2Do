@@ -15,6 +15,12 @@ var express = require('express');
 app.use(cors());
 app.use('/assets', express.static(__dirname + '/app'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({'message' : err.name + ': ' + err.message});
+  }
+});
 app.use(passport.initialize());
 
 mongoose.connect(config.getDbConnectionString());

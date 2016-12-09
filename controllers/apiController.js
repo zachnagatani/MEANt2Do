@@ -4,6 +4,11 @@
 var Todos = require('../models/todoModel');
 	User = require('../models/userModel');
 	bodyParser = require('body-parser');
+    jwt = require('express-jwt');
+    auth = jwt({
+        secret: 'MY_SECRET',
+        userProperty: 'payload'
+    });
 
 function requireLogin (req, res, next) {
     if (!req.session.user) {
@@ -76,13 +81,17 @@ module.exports = function(app) {
     });
 
     // Gets user data for a specific user
-    app.get('/api/users/:username', function(req, res) {
-        User.findOne({
-            username: req.params.username
-        }, function(err, user) {
-            if (err) throw err;
-            res.send(user);
-        });
+    app.get('/api/users/dashboard', auth, function(req, res) {
+        if (!req.payload._id) {
+            res.status(401).json({
+                'message': 'Unauthorized error: private dashboard'
+            });
+        } else {
+            User.findById(req.payload.id)
+                .exec(function(err, user) {
+                    res.status(200).json(user);
+                });
+        }
     });
 
     // Handles user signup
