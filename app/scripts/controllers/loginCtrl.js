@@ -4,7 +4,7 @@
 	angular.module('meantodo')
 		.controller('loginCtrl', ['$scope', '$state', 'apiPOST', 'authentication', function($scope, $state, apiPOST, authentication) {
 			var self = this;
-				URL = 'http://localhost:3000/api/users/login';
+				URL = 'https://tranquil-headland-44852.herokuapp.com/api/users/login';
 
 			self.state = 'Login';
 
