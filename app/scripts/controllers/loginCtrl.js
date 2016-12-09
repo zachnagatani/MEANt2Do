@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('meantodo')
-		.controller('loginCtrl', ['$scope', '$state', 'apiPOST', function($scope, $state, apiPOST) {
+		.controller('loginCtrl', ['$scope', '$state', 'apiPOST', 'authentication', function($scope, $state, apiPOST, authentication) {
 			var self = this;
 				URL = 'http://localhost:3000/api/users/login';
 
@@ -14,6 +14,8 @@
 					.then(function success(response) {
 						console.log(response);
 						if (response.status === 200) {
+							authentication.saveToken(response.data.token);
+							console.log(response.data.token);
 							$state.go('dashboard');
 						}
 					}, function error(response) {

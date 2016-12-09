@@ -19,4 +19,48 @@
 			};
 		}]);
 
+	angular.module('meantodo')
+		.service('authentication', ['$http', '$window', function($http, $window) {
+			var self = this;
+
+			self.saveToken = function(token) {
+				$window.localStorage['mean-token'] = token;
+			};
+
+			self.getToken = function() {
+				return $window.localStorage['mean-token'] = token;
+			};
+
+			self.logout = function() {
+				$window.localStorage.removeItem('mean-token');
+			};
+
+			self.isLoggedIn = function() {
+				var token = self.getToken;
+				var payload;
+
+				if(token) {
+					payload = token.split('.')[1];
+					payload = $window.atob(payload);
+					payload = JSON.parse(payload);
+
+					return payload.exp > Date.now() / 1000;
+				} else {
+					return false;
+				}
+			};
+
+			self.currentUser = function() {
+				if(isLoggedIn()) {
+					var payload = token.split('.')[1];
+					payload = $window.atob(payload);
+					payload = JSON.parse(payload);
+
+					return {
+						username: payload.username,
+					};
+				}
+			};
+		}]);
+
 }());
