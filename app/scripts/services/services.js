@@ -20,6 +20,15 @@
 		}]);
 
 	angular.module('meantodo')
+		.service('apiDELETE', ['$http', function($http) {
+			var self = this;
+
+			self.delete = function(url, config) {
+				return $http.delete(url, config);
+			};
+		}]);
+
+	angular.module('meantodo')
 		.service('authentication', ['$http', '$window', function($http, $window) {
 			var self = this;
 

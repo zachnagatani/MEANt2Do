@@ -58,6 +58,7 @@
   },
   "scripts": {
     "build-css": "node-sass --include-path scss app/styles/main.scss app/styles/main.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\""
+    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
+    "start": "node app.js"
   }
 }

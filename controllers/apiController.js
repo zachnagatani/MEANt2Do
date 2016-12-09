@@ -73,7 +73,7 @@ module.exports = function(app) {
     app.post('/api/todos/update', auth, function(req, res) {
     	// TODO: Add method for updating todos
         console.log('finding...');
-        Todos.findByIdAndUpdate({_id: req.body.id }, {
+        Todos.findByIdAndUpdate({ _id: req.body.id }, {
             todo: req.body.todo,
             isDone: req.body.isDone
         }, function(err, todo) {
@@ -83,11 +83,11 @@ module.exports = function(app) {
     });
 
     // Handles deleting todos
-    app.delete('/api/todos/delete', function(req, res) {
+    app.delete('/api/todos/delete/:id', auth, function(req, res) {
         // Find it by id and remove it!
-        Todos.findByIdAndRemove(req.body.id, function(err) {
-            if (err) throw err;
-            res.send('Todo deleted!');
+        Todos.findByIdAndRemove({ _id: req.params.id }, function(err) {
+            if (err) return res.sendStatus(404);
+            res.sendStatus(200);
         });
     });
 

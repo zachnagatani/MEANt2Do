@@ -26,7 +26,7 @@
 						</div>
 					</form> -->
 					<span ng-if="todo.isDone">&#10004; </span><span>{{ todo.todo }}</span>
-					<button class="btn btn-default btn-block pull-right">Delete</button>
+					<button class="btn btn-default btn-block pull-right" ng-click="vm.deleteTodo(todo)">Delete</button>
 					<button class="btn btn-default btn-block pull-right" ng-click="vm.enterEditing(todo)">Edit</button>
 					<button class="btn btn-default btn-block pull-right" ng-click="vm.checkTodo(todo)">Toggle Finished</button>
 				</li>
