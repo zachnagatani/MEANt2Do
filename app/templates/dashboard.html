@@ -6,11 +6,30 @@
 					<label for="todo">What do you need to do?</label>
 					<input type="text" name="todo" id="todo" class="form-control" ng-model="todo">
 				</div>
-				<input type="submit" value="Add" class="btn btn-default" ng-click="vm.addTodo(todo, $event)">
+				<input ng-hide="vm.editing" type="submit" value="Add" class="btn btn-default pull-right" ng-click="vm.addTodo(todo, $event)">
+				<input ng-show="vm.editing" type="submit" value="Update" class="btn btn-default pull-right" ng-click="vm.updateTodo(vm.currentTodo, todo, $event)">
 			</form>
 		</div>
 	</div>
-	<ul>
-		<li ng-repeat="todo in vm.todos">{{ todo.todo }}</li>
-	</ul>
+
+	<br>
+
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="todo in vm.todos">
+<!-- 					<form action="POST">
+						<div class="form-group">
+							<label for="updateTodo"></label>
+							<input type="text" name="updateTodo" id="updateTodo" ng-model="updateTodo" class="form-control" placeholder="{{ todo.todo }}">
+						</div>
+					</form> -->
+					<span>{{ todo.todo }}</span>
+					<button class="btn btn-default pull-right">Delete</button>
+					<button class="btn btn-default pull-right" ng-click="vm.enterEditing(todo)">Edit</button>
+					<button class="btn btn-default pull-right">Done</button>
+				</li>
+			</ul>	
+		</div>
+	</div>
 </div>

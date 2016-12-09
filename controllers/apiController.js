@@ -70,8 +70,16 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/api/todos/update', function(req, res) {
+    app.post('/api/todos/update', auth, function(req, res) {
     	// TODO: Add method for updating todos
+        console.log('finding...');
+        Todos.findByIdAndUpdate({_id: req.body.id }, {
+            todo: req.body.todo,
+            // isDone: req.body.isDone
+        }, function(err, todo) {
+            if (err) return res.sendStatus(404);
+            res.sendStatus(200);
+        });
     });
 
     // Handles deleting todos
