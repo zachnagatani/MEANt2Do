@@ -4,7 +4,7 @@
 	angular.module('meantodo')
 		.controller('signupCtrl', ['$scope', '$state', 'apiPOST', 'authentication', function($scope, $state, apiPOST, authentication) {
 			var self = this;
-				URL = 'https://tranquil-headland-44852.herokuapp.com/api/users/signup';
+				URL = 'http://localhost:3000/api/users/signup';
 
 			self.state = 'Signup';
 
@@ -12,9 +12,7 @@
 				event.preventDefault();
 				apiPOST.post(URL, { 'username': username, 'password': password })
 					.then(function success(response) {
-						console.log(response);
 						if (response.status === 200) {
-							console.log(response.data.token);
 							authentication.saveToken(response.data.token);
 							$scope.$emit('loggedIn', authentication.isLoggedIn());
 							$state.go('dashboard');
