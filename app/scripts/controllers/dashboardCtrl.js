@@ -24,40 +24,47 @@
 
 			self.addTodo = function(todo, event) {
 				event.preventDefault();
-				apiPOST.post(NEWTODOURL, {'todo': todo }, {
-					headers: {
-						Authorization: 'Bearer ' + token
-					}
-				})
-					.then(function(response) {
-						// Clear out the input field
-						$scope.todo = '';
-						// Update the todos
-						self.getTodos();
-					}, function(response) {
-						console.log(response);
-					});
+				if ($scope.todo) {
+					apiPOST.post(NEWTODOURL, {'todo': todo }, {
+						headers: {
+							Authorization: 'Bearer ' + token
+						}
+					})
+						.then(function(response) {
+							// Clear out the input field
+							$scope.todo = '';
+							// Update the todos
+							self.getTodos();
+						}, function(response) {
+							console.log(response);
+						});
+				}
 			};
 
 			self.enterEditing = function(todo) {
 				self.editing = true;
 				self.currentTodo = todo;
-				console.log(self.currentTodo);
+				$('#todo').focus();
 			};
 
 			self.updateTodo = function(currentTodo, todo, event) {
 				if (event) event.preventDefault();
-				// console.log(currentTodo, todo);
 				apiPOST.post(UPDATETODOURL, { 'id': currentTodo._id, 'todo': todo, 'isDone': currentTodo.isDone }, {
 					headers: {
 						Authorization: 'Bearer ' + token
 					}
 				})
 					.then(function(response) {
+						self.editing = false;
+						$scope.todo = '';
 						self.getTodos();
 					}, function(response) {
 						console.log(response);
 					});
+			};
+
+			self.cancelEdit = function() {
+				self.editing = false;
 			};
 
 			self.checkTodo = function(todo) {

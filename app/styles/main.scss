@@ -1,5 +1,16 @@
 $icon-font-path: '../fonts/';
 
+// Colors
+$primary-color: #00BCD4;
+$dark-primary-color: #0097A7;
+$light-primary-color: #B2EBF2;
+$accent-color: #607D8B;
+
+// Text Colors
+$primary-text-color: #212121;
+$light-text-color: #fff;
+
+
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
@@ -7,13 +18,13 @@ $icon-font-path: '../fonts/';
 body, html, main {
   width: 100%;
   height: 100%;
-  color: black;
 }
 
-// .list-group-item {
-// 	padding: 30px;
-// }
+body {
+	color: $primary-text-color;
+}
 
+// Badges
 .badge--danger {
 	background-color: #d43f3a;
 }
@@ -26,6 +37,37 @@ body, html, main {
 	background-color: #449d44;
 }
 
+// Helpers
 .green-bg {
 	background: green;
+}
+
+// Buttons
+.btn {
+	border-radius: 0;
+}
+
+// Nav
+
+.navbar-default {
+	background-color: $primary-color;
+	color: $light-text-color;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: $light-text-color;
+}
+
+.navbar-default .navbar-brand {
+	color: $light-text-color;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #fff;
+}
+
+// Panel Header
+.panel-default > .panel-heading {
+	background-color: $accent-color;
+	color: $light-text-color;
 }
