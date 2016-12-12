@@ -37,8 +37,8 @@
 
         <div class="collapse navbar-collapse" id="nav-main">
           <ul class="nav navbar-nav navbar-right">
-            <li ng-show="!vm.isLoggedIn"><a href="/#/login">Login</a></li>
-            <li ng-show="!vm.isLoggedIn"><a href="/#/signup">Sign Up</a></li>
+            <li ng-show="!vm.isLoggedIn"><a ui-sref="login">Login</a></li>
+            <li ng-show="!vm.isLoggedIn"><a ui-sref="signup">Sign Up</a></li>
             <li ng-show="vm.isLoggedIn"><a href="" ng-click="vm.logout()">Logout</a></li>
           </ul>
         </div>
