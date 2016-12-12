@@ -10,8 +10,20 @@ body, html, main {
   color: black;
 }
 
-.list-group-item {
-	padding: 30px;
+// .list-group-item {
+// 	padding: 30px;
+// }
+
+.badge--danger {
+	background-color: #d43f3a;
+}
+
+.badge--warning {
+	background-color: #ec971f;
+}
+
+.badge--success {
+	background-color: #449d44;
 }
 
 .green-bg {

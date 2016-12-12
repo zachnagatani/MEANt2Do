@@ -7,8 +7,8 @@
 					<label for="todo" ng-show="vm.editing">Editing: "{{ vm.currentTodo.todo }}"</label>
 					<input type="text" name="todo" id="todo" class="form-control" ng-model="todo">
 				</div>
-				<input ng-hide="vm.editing" type="submit" value="Add" class="btn btn-default pull-right" ng-click="vm.addTodo(todo, $event)">
-				<input ng-show="vm.editing" type="submit" value="Update" class="btn btn-default pull-right" ng-click="vm.updateTodo(vm.currentTodo, todo, $event)">
+				<input ng-if="!vm.editing" type="submit" value="Add" class="btn btn-default pull-right" ng-click="vm.addTodo(todo, $event)">
+				<input ng-if="vm.editing" type="submit" value="Update" class="btn btn-default pull-right" ng-click="vm.updateTodo(vm.currentTodo, todo, $event)">
 			</form>
 		</div>
 	</div>
@@ -16,21 +16,18 @@
 	<br>
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-6 col-md-offset-3">
 			<ul class="list-group">
 				<li class="list-group-item clearfix" ng-repeat="todo in vm.todos">
-<!-- 					<form action="POST">
-						<div class="form-group">
-							<label for="updateTodo"></label>
-							<input type="text" name="updateTodo" id="updateTodo" ng-model="updateTodo" class="form-control" placeholder="{{ todo.todo }}">
-						</div>
-					</form> -->
 					<span ng-if="todo.isDone">&#10004; </span><span>{{ todo.todo }}</span>
-					<button class="btn btn-default btn-block pull-right" ng-click="vm.deleteTodo(todo)">Delete</button>
+					<button class="btn btn-danger badge badge--danger" type="button" ng-click="vm.deleteTodo(todo)"><span class="glyphicon glyphicon-remove"></span></button>
+					<button class="btn btn-warning badge badge--warning" type="button" ng-click="vm.enterEditing(todo)"><span class="glyphicon glyphicon-pencil"></span></button>
+					<button class="btn btn-success badge badge--success" type="button" ng-click="vm.checkTodo(todo)"><span class="glyphicon glyphicon-ok"></span></button>
+					<!-- <button class="btn btn-default btn-block pull-right" ng-click="vm.deleteTodo(todo)">Delete</button>
 					<button class="btn btn-default btn-block pull-right" ng-click="vm.enterEditing(todo)">Edit</button>
-					<button class="btn btn-default btn-block pull-right" ng-click="vm.checkTodo(todo)">Toggle Finished</button>
+					<button class="btn btn-default btn-block pull-right" ng-click="vm.checkTodo(todo)">Toggle Finished</button> -->
 				</li>
 			</ul>
 		</div>
-	</div>
+	</div> 
 </div>

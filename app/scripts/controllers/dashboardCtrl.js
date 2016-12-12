@@ -5,7 +5,7 @@
 		.controller('dashboardCtrl', ['$scope', '$state', 'authentication', 'apiGET', 'apiPOST', 'apiDELETE', function($scope, $state, authentication, apiGET, apiPOST, apiDELETE) {
 			var self = this;
 			var GETURL = 'http://localhost:3000/api/todos';
-			var NEWTODOURL = 'http://localhost:3000/todos/new';
+			var NEWTODOURL = 'http://localhost:3000/api/todos/new';
 			var UPDATETODOURL = 'http://localhost:3000/api/todos/update';
 			var token = authentication.getToken();
 			if (!authentication.isLoggedIn()) $state.go('login');
@@ -30,6 +30,9 @@
 					}
 				})
 					.then(function(response) {
+						// Clear out the input field
+						$scope.todo = '';
+						// Update the todos
 						self.getTodos();
 					}, function(response) {
 						console.log(response);
