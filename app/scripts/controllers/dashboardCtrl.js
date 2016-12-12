@@ -64,7 +64,7 @@
 			};
 
 			self.cancelEdit = function() {
-				self.editing = false;
+				if (!$scope.todo) self.editing = false;
 			};
 
 			self.checkTodo = function(todo) {
