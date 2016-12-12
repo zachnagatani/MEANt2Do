@@ -24,15 +24,6 @@ module.exports = function(app) {
     // Get all the todos that belong to a specific user
     app.get('/api/todos', auth, function(req, res) {
         // Grab all of the Todos instances
-        // Todos.find({
-        //     // that belong to the username passed into the URL
-        //     username: req.params.username
-        // }, function(err, todos) {
-        //     if (err) throw err;
-        //     // Send the todos grabbed from Mongo as the HTTP response
-        //     res.send(todos);
-        // });
-
         if (!req.payload._id) {
             res.status(401).json({
                 'message': 'Unauthorized error: private dashboard'
@@ -129,48 +120,12 @@ module.exports = function(app) {
                 res.json({
                     'token': token
                 });
-
-                // if (error) return res.status(400).end();
-
-                // return res.sendStatus(200);
-                // set the session to that user
-                // req.session.user = newUser;
-                // res.send('User saved!');
-                // redirect to the dashboard
-                // res.redirect('/dashboard');
             });
         });
     });
 
     // Logs the user in
     app.post('/api/users/login', function(req, res) {
-        // Grab the user from the username provided
-        // User.findOne({
-        //     username: req.body.username
-        // }, function(err, user) {
-        //     // Compare the entered pw to the pw in the db
-        //     if (user) { 
-        //         user.comparePassword(req.body.password, function(err, isMatch) {
-        //             if (err) throw err;
-        //             // If it matches,
-        //             if (isMatch) {
-        //                 // Set the user property on our session to the user
-        //                 // req.session.user = user;
-        //                 // Hide the users password
-        //                 // req.session.user.password = null;
-        //                 // res.redirect('/dashboard');
-        //                 res.sendStatus(200);
-        //             } else {
-        //                 res.sendStatus(400);
-        //             	// TODO: Better error handling
-        //                 // res.send('Invalid username or password');
-        //             }
-        //         });
-        //     } else {
-        //         res.sendStatus(400);
-        //         // res.redirect('/signup');
-        //     }
-        // });
         passport.authenticate('local', function(err, user, info) {
             var token;
 
